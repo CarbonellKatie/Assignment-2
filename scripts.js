@@ -1,7 +1,7 @@
 // const axios = require("axios").default;
 
 $(function () {
-  //Get
+  //Get Users - DONE
   $("#get-button").on("click", function () {
     $("#namebody").empty();
     //TODO: get all users' IDs & display it
@@ -14,7 +14,7 @@ $(function () {
     });
   });
 
-  //Get tweets
+  //Get tweets- DONE
   $("#get-tweets-button").on("click", function () {
     //TODO: get tweet info and display it
     $("#tweetbody").empty();
@@ -27,18 +27,18 @@ $(function () {
     });
   });
 
-  //Get searched tweets
+  //Get searched tweets - TODO
   $("#get-searched-tweets").on("click", function () {
     //TODO: get a searched tweet(s) & display it
   });
 
-  //CREATE
+  //CREATE - DONE
   $("#create-form").on("submit", function (event) {
     event.preventDefault();
 
     var createInput = $("#create-input");
     var newTweetInfo = createInput.val();
-    // console.log(newTweetInfo);
+
     var i = newTweetInfo.indexOf(";");
     if (i == -1) {
       alert("improper tweet format, please re-enter");
@@ -46,10 +46,6 @@ $(function () {
     let tweetId = newTweetInfo.slice(0, i);
     let tweetText = newTweetInfo.slice(i + 1);
 
-    console.log(tweetText);
-    console.log(tweetId);
-
-    // let newtweet = { id: tweetId, text: tweetText };
     $.ajax({
       url: "/tweetinfo",
       method: "POST",
@@ -66,12 +62,29 @@ $(function () {
   //Create searched tweets
   $("#search-form").on("submit", function (event) {
     event.preventDefault();
-    var userID = $("#search-input");
+    var tweetId = $("#search-input").val();
+
+    console.log("button clicked");
+    $.ajax({
+      url: "/searchinfo",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({ id: tweetId }),
+      success: function (searchedTweets) {
+        $("#searchbody").empty();
+        console.log(searchedTweets);
+        searchedTweets.forEach((tweet) =>
+          $("#searchbody").append(
+            `<tr><td>${tweet.id}</td><td>${tweet.text}</td><td>${tweet.created_at}</td></tr>`
+          )
+        );
+      },
+    });
 
     //TODO: search a tweet and display it.
   });
 
-  //UPDATE/PUT
+  //UPDATE/PUT -TODO
   $("#update-user").on("submit", function (event) {
     event.preventDefault();
     var updateInput = $("#update-input");
@@ -85,7 +98,7 @@ $(function () {
     //TODO: update a tweet
   });
 
-  //DELETE
+  //DELETE - DONE
   $("#delete-form").on("submit", function () {
     var id = $("#delete-input");
     event.preventDefault();

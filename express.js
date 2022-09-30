@@ -58,8 +58,7 @@ app.post("/tweetinfo", function (req, res) {
     text: req.body.text,
     created_at: new Date().toString(),
   };
-  // console.log("here is tweet!!!");
-  // console.log(tweet);
+
   tweetinfo.push(tweet);
   res.status(200);
 });
@@ -69,10 +68,12 @@ app.post("/searchinfo", function (req, res) {
   //array containing all tweets which have the given id
   let resultTweets = [];
   let searchId = req.body.id;
+  console.log(searchId);
   //TODO: search a tweet
   tweetinfo.forEach((tweet) => {
     if (tweet.id == searchId) {
       resultTweets.push(tweet);
+      //add the matching tweets to the searched tweets array to indicate we found this tweet via search
       searchedTweets.push(tweet);
     }
   });
