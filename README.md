@@ -1,9 +1,16 @@
+# Katie Carbonell Assignment 1
+
+To run:
+
+1. have Node.js and npm installed
+2. run npm install in Carbonell-Assignment1 folder
+3. run node express.js
+
 # Node-Express-jQuery-AJAX-REST-API
 
 Created using Node.js, Express.js, jQuery.js, AJAX and REST api
 
 Originally created by Daylon Carse and modified by Ji Hwan Park
-
 
 # Installation in local
 
@@ -17,12 +24,13 @@ npm install
 
 'npm start' or 'nodemon app'
 
-Code is running on 
-+ http://localhost:3000/
+Code is running on
+
+- http://localhost:3000/
 
 # Instructions for using
 
-## In the tweets section 
+## In the tweets section
 
 Click the 'Get Tweets' button to show all tweets.
 
@@ -44,8 +52,6 @@ It will show the format of how the tweets will show up when searched for.
 
 To search for a tweet, enter an ID and then click on the 'Search' button.
 
-
 # References
 
-+ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbHRvUWEyN3NlWFV2a08tRDRGMWg1cktFR0M4d3xBQ3Jtc0tudUVUWUZPLURhWVpXTDF4RFIweEI4VnRSVUJkSW96QjFRWDNsY3lfd3lDd0d3aHR6Vll6MU9SU0RFZ2FhVTVaS0d0Y3B0ZGZxdC1pYmNCRU96VmI2dUtfV284THRWSHV6dXduM1VOd3V2RmdlZFJiMA&q=https%3A%2F%2Fgithub.com%2Fmichaelcheng429%2Fajax-restful-api-tutorial
-
+- https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbHRvUWEyN3NlWFV2a08tRDRGMWg1cktFR0M4d3xBQ3Jtc0tudUVUWUZPLURhWVpXTDF4RFIweEI4VnRSVUJkSW96QjFRWDNsY3lfd3lDd0d3aHR6Vll6MU9SU0RFZ2FhVTVaS0d0Y3B0ZGZxdC1pYmNCRU96VmI2dUtfV284THRWSHV6dXduM1VOd3V2RmdlZFJiMA&q=https%3A%2F%2Fgithub.com%2Fmichaelcheng429%2Fajax-restful-api-tutorial
