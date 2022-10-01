@@ -21,7 +21,6 @@ fs.readFile("favs.json", "utf8", function readFileCallback(err, data) {
     throw err;
   } else {
     tweetinfo = JSON.parse(data);
-    //TODO: store loaded data into a global variable for tweet data
   }
 });
 
@@ -29,36 +28,39 @@ fs.readFile("favs.json", "utf8", function readFileCallback(err, data) {
 //Shows user info
 
 app.get("/tweets", function (req, res) {
-  //TODO: send all users' IDs
-
+  //send all users' IDs
   let userInfo = [];
+  //loop through all tweets and find all user ids associated with them
   for (let i = 0; i < tweetinfo.length; i++) {
-    userInfo.push(tweetinfo[i].user);
+    if (tweetinfo[i].hasOwnProperty("user")) {
+      userInfo.push(tweetinfo[i].user);
+    }
   }
   res.send(userInfo);
 });
 
 //Shows tweet info
 app.get("/tweetinfo", function (req, res) {
+  //return array of all tweets
   res.send(tweetinfo);
-  //TODO: send tweet info
 });
 
 //Shows searched tweets
 app.get("/searchinfo", function (req, res) {
+  //return array of recently searched tweets
   res.send(searchedTweets);
-  //TODO: send searched tweets
 });
 
 //Post functions
 //Posts created tweets
 app.post("/tweetinfo", function (req, res) {
+  //create a new tweet object with the given data in req body
   let tweet = {
     id: req.body.id,
     text: req.body.text,
     created_at: new Date().toString(),
   };
-
+  //add tweet to tweets array
   tweetinfo.push(tweet);
   res.status(200);
 });
@@ -68,12 +70,12 @@ app.post("/searchinfo", function (req, res) {
   //array containing all tweets which have the given id
   let resultTweets = [];
   let searchId = req.body.id;
-  console.log(searchId);
-  //TODO: search a tweet
+
+  //loop through all tweets and add all tweets with the given id to the response array
   tweetinfo.forEach((tweet) => {
     if (tweet.id == searchId) {
       resultTweets.push(tweet);
-      //add the matching tweets to the searched tweets array to indicate we found this tweet via search
+      //add the matching tweets to the searched tweets array to indicate we recently searched this tweet
       searchedTweets.push(tweet);
     }
   });
@@ -81,39 +83,32 @@ app.post("/searchinfo", function (req, res) {
   res.send(resultTweets);
 });
 
-//Update
+//Update a screen with the user's name and set it to the new screen name
 app.put("/tweets/:nm", function (req, res) {
-  let currName = req.params.nm;
+  let username = req.params.nm;
   let newName = req.body.newName;
-  console.log("NEW NAME:");
-  console.log(newName);
 
+  //loop through all tweets and find the given screen name.
   for (let i = 0; i < tweetinfo.length; i++) {
     let currTweet = tweetinfo[i];
 
-    if (currTweet.user?.screen_name == currName) {
+    //Update the given screen name when found
+    if (currTweet.user?.name == username) {
       currTweet.user.screen_name = newName;
-      console.log("updated::");
-      console.log(currTweet.user.sceen_name);
-      console.log(i);
     }
   }
-
   res.status(200);
-  //TODO: update tweets
 });
 
 //Delete
 app.delete("/tweetinfo/:tweetid", function (req, res) {
-  //TODO: delete a tweet
+  //delete a tweet with the given ID
+  //loop through tweets array and cut out the tweet with the given ID
   for (let i = 0; i < tweetinfo.length; i++) {
     let currTweet = tweetinfo[i];
+    //if we find the tweet with the given ID, cut it out of the tweets array
     if (currTweet.id == req.params.tweetid) {
-      console.log("length before: ");
-      console.log(tweetinfo.length);
       tweetinfo.splice(i, 1);
-      console.log("length after: ");
-      console.log(tweetinfo.length);
     }
   }
 });
