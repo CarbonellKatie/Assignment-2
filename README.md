@@ -5,6 +5,7 @@ To run:
 1. have Node.js and npm installed
 2. run npm install in Carbonell-Assignment1 folder
 3. run node express.js
+4. navigate to http://localhost:3000
 
 # Node-Express-jQuery-AJAX-REST-API
 
