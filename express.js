@@ -83,6 +83,23 @@ app.post("/searchinfo", function (req, res) {
 
 //Update
 app.put("/tweets/:nm", function (req, res) {
+  let currName = req.params.nm;
+  let newName = req.body.newName;
+  console.log("NEW NAME:");
+  console.log(newName);
+
+  for (let i = 0; i < tweetinfo.length; i++) {
+    let currTweet = tweetinfo[i];
+
+    if (currTweet.user?.screen_name == currName) {
+      currTweet.user.screen_name = newName;
+      console.log("updated::");
+      console.log(currTweet.user.sceen_name);
+      console.log(i);
+    }
+  }
+
+  res.status(200);
   //TODO: update tweets
 });
 
